@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>快取生成器—月球魚科技</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="favicon.png"> 
+    <link rel="icon" type="image/png" href="favicon.png"> 
     <style>
         /* MFUI 風格網站設計 */
         :root {
@@ -14,116 +13,151 @@
             --primary-color: #64B5F6; /* 冰川藍 */
             --text-primary: #FFFFFF;
             --text-secondary: #B3B3B3;
+            --accent-hover: #90CAF9;
         }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         header {
-            padding: 20px 50px;
+            padding: 15px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgba(30, 30, 30, 0.9);
+            background-color: rgba(30, 30, 30, 0.85);
             position: sticky;
             top: 0;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: Segoe UI;
+            font-weight: bold;
             color: var(--primary-color);
             text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
         }
 
         .hero {
             text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(180deg, var(--bg-color) 0%, var(--surface-color) 100%);
+            padding: 120px 20px;
+            background: radial-gradient(circle at center, #1e2a38 0%, var(--bg-color) 100%);
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 30px auto;
+            max-width: 650px;
+            margin: 0 auto 40px auto;
         }
 
         .btn-download {
             background-color: var(--primary-color);
-            color: #000;
-            padding: 15px 30px;
+            color: #0d47a1;
+            padding: 16px 35px;
             text-decoration: none;
             font-weight: bold;
-            border-radius: 30px;
+            border-radius: 50px;
             font-size: 1.1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: inline-block;
         }
 
         .btn-download:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(100, 181, 246, 0.4);
+            transform: scale(1.05);
+            background-color: var(--accent-hover);
+            box-shadow: 0 10px 20px rgba(100, 181, 246, 0.3);
         }
 
         .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
 
         .feature-card {
             background-color: var(--surface-color);
-            padding: 30px;
-            border-radius: 15px;
-            width: 300px;
+            padding: 35px;
+            border-radius: 20px;
             text-align: center;
-            border: 1px solid #333;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
         }
 
         .feature-card h3 {
             color: var(--primary-color);
+            margin-top: 0;
         }
 
         .changelog {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 60px 20px;
         }
 
         .changelog-box {
             background-color: var(--surface-color);
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid var(--primary-color);
+            padding: 35px;
+            border-radius: 20px;
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .changelog h2 {
+            margin-bottom: 30px;
         }
 
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid #333;
-            margin-top: 50px;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 60px;
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            header { padding: 20px; }
+            header { padding: 15px 20px; }
+            .hero { padding: 80px 20px; }
+            nav a { margin-left: 15px; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -132,56 +166,57 @@
     <header>
         <a href="#" class="logo">月球魚科技</a>
         <nav>
-            <a href="https://moonfish0212.github.io" style="color: white; text-decoration: none; margin-left: 20px;">首頁</a>
-            <a href="https://moonfish0212.github.io/cache_generator/changelog.html" style="color: white; text-decoration: none; margin-left: 20px;">更新日誌</a>
+            <a href="https://moonfish0212.github.io">首頁</a>
+            <a href="https://moonfish0212.github.io/cache_generator/changelog.html">更新日誌</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <h1>快取生成器</h1>
-        <p>精準、高效的儲存空間測試工具。搭載全新 MFUI 系統，支援全域主題切換與多語言，讓您的測試工作變得優雅且專業。</p>
-        <a href="https://moonfish0212.github.io/cache_generator/not-found.html" class="btn-download">下載 APK (最新版本)</a>
-    </section>
+    <main>
+        <section class="hero">
+            <h1>快取生成器</h1>
+            <p>精準、高效的儲存空間測試工具。搭載全新 MFUI 系統，支援全域主題切換與多語言，讓您的測試工作變得優雅且專業。</p>
+            <a href="https://moonfish0212.github.io/cache_generator/not-found.html" class="btn-download">立即下載 APK</a>
+        </section>
 
-    <section id="features" class="features">
-        <div class="feature-card">
-            <h3>🎨 MFUI 系統</h3>
-            <p>內建「冰川」、「鈦影」等多種主題樣式，支援自訂字體與大小，打造專屬視覺體驗。</p>
-        </div>
-        <div class="feature-card">
-            <h3>🎯 零誤差生成</h3>
-            <p>採用精確的位元組計算邏輯，確保生成的快取檔案大小分毫不差，完美存放於專屬目錄。</p>
-        </div>
-        <div class="feature-card">
-            <h3>🛡️ 安全防護機制</h3>
-            <p>內建 2GB 大檔案生成警告與精準的裝置空間偵測，保護您的舊裝置免於崩潰卡頓。</p>
-        </div>
+        <section id="features" class="features">
             <div class="feature-card">
-            <h3>✅ 保證無毒</h3>
-            <p>內部程式碼完全無病毒代碼，請在安裝時允許「安裝不明來源的應用程式」。</p>
-        </div>
-    </section>
+                <h3>🎨 MFUI 系統</h3>
+                <p>內建「冰川」、「鈦影」等多種主題樣式，支援自訂字體與大小，打造專屬視覺體驗。</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎯 零誤差生成</h3>
+                <p>採用精確的位元組計算邏輯，確保生成的快取檔案大小分毫不差，完美存放於專屬目錄。</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛡️ 安全防護</h3>
+                <p>內建 2GB 大檔案生成警告與精準裝置空間偵測，保護您的舊裝置免於崩潰卡頓。</p>
+            </div>
+            <div class="feature-card">
+                <h3>✅ 純淨無毒</h3>
+                <p>原始碼經過嚴格審核，無惡意後門。請在安裝時允許「安裝不明來源的應用程式」。</p>
+            </div>
+        </section>
 
-    <section id="changelog" class="changelog">
-        <h2>更新日誌</h2>
-        <div class="changelog-box">
-            <h3>v1.0.2 - 更新內容</h3>
-            <p style="color: var(--text-secondary);">發佈日期: 2026-04-11</p>
-            <ul>
-                <li>全新導入「MFUI」系統與全域設定選單</li>
-                <li>支援繁體中文與美式英文多語言切換</li>
-                <li>更新現代化啟動畫面</li>
-                <li>修正舊版生成誤差與儲存空間計算錯誤</li>
-                <li>新增超過 2GB 生成時的安全警告彈窗</li>
-                <li>檔案生成路徑優化至 `files/generated_files`</li>
-            </ul>
-        </div>
-    </section>
+        <section id="changelog" class="changelog">
+            <h2>更新日誌</h2>
+            <div class="changelog-box">
+                <h3>v1.0.2 - 更新內容</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">發佈日期: 2026-04-11</p>
+                <ul style="padding-left: 20px;">
+                    <li>全新導入「MFUI」系統與全域設定選單</li>
+                    <li>支援繁體中文與美式英文多語言切換</li>
+                    <li>更新現代化啟動畫面 (Splash Screen)</li>
+                    <li>修正舊版生成誤差與儲存空間計算錯誤</li>
+                    <li>新增超過 2GB 生成時的安全警告彈窗</li>
+                    <li>檔案生成路徑優化至 <code>files/generated_files</code></li>
+                </ul>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>© 2026 Moon Fish (月球魚). All rights reserved.</p>
+        <p>© 2026 Moon Fish (月球魚科技). All rights reserved.</p>
     </footer>
 
 </body>
-  </html>
-  
+</html>
